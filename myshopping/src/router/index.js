@@ -11,10 +11,27 @@ import Search from '@/pages/Search/index.vue';
 export default new VueRouter({
   //配置路由
   routes: [
-    { path: '/home', component: Home, meta: { show: true } },
-    { path: '/search/:keyWord', component: Search, meta: { show: true } },
-    { path: '/login', component: Login, meta: { show: false } },
-    { path: '/register', component: Register, meta: { show: false } },
+    {
+      path: '/home',
+      component: Home,
+      meta: { show: true },
+    },
+    {
+      path: '/search/:keyWord',
+      component: Search,
+      meta: { show: true },
+      name: 'search',
+    },
+    {
+      path: '/login',
+      component: Login,
+      meta: { show: false },
+    },
+    {
+      path: '/register',
+      component: Register,
+      meta: { show: false },
+    },
     // 重定向
     {
       path: '*',

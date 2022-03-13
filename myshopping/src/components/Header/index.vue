@@ -51,9 +51,10 @@ export default {
     },
     methods: {
         goSearch(){
-            // 路由传递参数(俩种方法)
+            // 路由传递参数(三种方法)
             // this.$router.push("/search/"+this.keyWord+"?k="+this.keyWord.toUpperCase())
-            this.$router.push(`/search/${this.keyWord}?k=${this.keyWord.toUpperCase()}`)
+            // this.$router.push(`/search/${this.keyWord}?k=${this.keyWord.toUpperCase()}`)
+            this.$router.push({name:'search',params:{keyWord:this.keyWord},query:{k:this.keyWord.toUpperCase()}})
         }
     }
 }

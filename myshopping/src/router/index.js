@@ -8,6 +8,33 @@ import Home from '@/pages/Home/index.vue';
 import Login from '@/pages/Login/index.vue';
 import Register from '@/pages/Register/index.vue';
 import Search from '@/pages/Search/index.vue';
+let originPush = VueRouter.prototype.push;
+let originReplace = VueRouter.prototype.replace;
+// 重写push\replace
+// 第一个参数，告诉原来的push方法往哪里跳转（传递哪些参数）
+VueRouter.prototype.push = function (location, resolve, reject) {
+  if (resolve && reject) {
+    originPush.call(this, location, resolve, reject);
+  } else {
+    originPush.call(
+      this,
+      location,
+      () => {},
+      () => {}
+    );
+  }
+};
+VueRouter.prototype.replace = function (location, resolve, reject) {
+  if (resolve && reject) {
+    originReplace.call(this, location, resolve, reject);
+  } else {
+    originPush.call(
+      this,
+      () => {},
+      () => {}
+    );
+  }
+};
 export default new VueRouter({
   //配置路由
   routes: [
@@ -17,7 +44,7 @@ export default new VueRouter({
       meta: { show: true },
     },
     {
-      path: '/search/:keyWord',
+      path: '/search/:keyWord?',
       component: Search,
       meta: { show: true },
       name: 'search',

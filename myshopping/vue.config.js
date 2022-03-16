@@ -11,5 +11,10 @@ module.exports = {
     host: 'localhost',
     port: 8080,
     open: true,
+    proxy: {
+      '/api': {
+        target: 'http://39.98.123.211',
+      },
+    },
   },
 };

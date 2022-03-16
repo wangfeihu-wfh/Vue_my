@@ -55,6 +55,7 @@ export default {
             // this.$router.push("/search/"+this.keyWord+"?k="+this.keyWord.toUpperCase())
             // this.$router.push(`/search/${this.keyWord}?k=${this.keyWord.toUpperCase()}`)
             this.$router.push({name:'search',params:{keyWord:this.keyWord},query:{k:this.keyWord.toUpperCase()}})
+            // this.$router.push({name:'search',params:{keyWord:this.keyWord||''||undefined},query:{k:this.keyWord.toUpperCase()}})
         }
     }
 }

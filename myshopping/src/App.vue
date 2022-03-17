@@ -7,15 +7,18 @@
 </template>
 
 <script>
-import Header from './components/Header/index.vue'
-import Footer from './components/Footer/index.vue'
+import Header from "./components/Header/index.vue";
+import Footer from "./components/Footer/index.vue";
 export default {
-  name: 'App',
+  name: "App",
   components: {
-      Header,
-      Footer
-  }
-}
+    Header,
+    Footer,
+  },
+  mounted() {
+    this.$store.dispatch("categoryList");
+  },
+};
 </script>
 
 <style>

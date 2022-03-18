@@ -95,7 +95,7 @@ export default {
   },
 
   methods: {
-    //   防抖操作
+    //   防抖操作:防止菜单栏抖动
     changeIndex: throttle(function (index) {
       this.currentIndex = index;
     }, 50),

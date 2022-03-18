@@ -1,8 +1,4 @@
-// const { defineConfig } = require('@vue/cli-service')
-// module.exports = defineConfig({
-//   transpileDependencies: true
-// })
-
+// master分支修改了
 module.exports = {
   // 关闭eslint
   lintOnSave: false,

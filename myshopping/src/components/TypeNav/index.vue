@@ -114,8 +114,6 @@ export default {
       console.log(element);
       let { categoryname, category1id, category2id, category3id } =
         element.dataset;
-      console.log("element.dataset", element.dataset);
-      console.log(categoryname, category1id, category2id, category3id);
       if (categoryname) {
         let location = { name: "search" };
         let query = { categoryName: categoryname };
@@ -126,8 +124,11 @@ export default {
         } else {
           query.category3id = category3id;
         }
-        location.query = query;
-        this.$router.push(location);
+        if (this.$route.params) {
+          location.params = this.$route.params;
+          location.query = query;
+          this.$router.push(location);
+        }
       }
     },
   },

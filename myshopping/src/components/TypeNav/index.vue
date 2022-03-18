@@ -95,6 +95,7 @@ export default {
   },
 
   methods: {
+    //   防抖操作
     changeIndex: throttle(function (index) {
       this.currentIndex = index;
     }, 50),

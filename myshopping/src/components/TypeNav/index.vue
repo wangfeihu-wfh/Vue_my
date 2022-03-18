@@ -88,7 +88,7 @@ export default {
     }
   },
   computed: {
-    //state:他是咱们大仓库中的state（包含home|search）
+    //state:他是咱们大仓库中的state（包含home|search等数据库）
     ...mapState({
       categoryList: (state) => state.home.categoryList,
     }),

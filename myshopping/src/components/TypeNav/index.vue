@@ -112,7 +112,6 @@ export default {
     },
     goSearch(event) {
       let element = event.target;
-      console.log(element);
       let { categoryname, category1id, category2id, category3id } =
         element.dataset;
       if (categoryname) {
@@ -125,11 +124,8 @@ export default {
         } else {
           query.category3id = category3id;
         }
-        if (this.$route.params) {
-          location.params = this.$route.params;
-          location.query = query;
-          this.$router.push(location);
-        }
+        location.query = query;
+        this.$router.push(location);
       }
     },
   },

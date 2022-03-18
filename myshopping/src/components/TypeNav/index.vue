@@ -88,13 +88,14 @@ export default {
     }
   },
   computed: {
-    //state:他是咱们大仓库中的state（包含home|search）
+    //state:他是咱们大仓库中的state（包含home|search等数据库）
     ...mapState({
       categoryList: (state) => state.home.categoryList,
     }),
   },
 
   methods: {
+    //   防抖操作:防止菜单栏抖动
     changeIndex: throttle(function (index) {
       this.currentIndex = index;
     }, 50),

@@ -10,9 +10,11 @@ const actions = {
     }
   },
   async getBannerList({ commit }) {
+    console.log('getBannerList-satrt');
     let result = await reqGetBannerList();
-    console.log(result);
+    console.log('getBannerList-end');
     if (result.code === 200) {
+      console.log('result');
       commit('GETBANNERLIST', result.data);
     } else {
       throw new Error('list 数据请求错误');
@@ -24,6 +26,7 @@ const mutations = {
     state.categoryList = categoryList;
   },
   GETBANNERLIST(state, bannerList) {
+    console.log('GETBANNERLIST');
     state.bannerList = bannerList;
   },
 };

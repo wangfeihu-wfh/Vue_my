@@ -100,34 +100,65 @@ import { mapState } from "vuex";
 import Swiper from "swiper";
 export default {
   name: "ListContainer",
+  //   watch: {
+  //     bannerList: {
+  //       handler() {
+  //         console.log("handler");
+  //         this.$nextTick(() => {
+  //           console.log("nextTick");
+  //           var mySwiper = new Swiper(".swiper-container", {
+  //             loop: true, // 循环模式选项
+  //             // 如果需要分页器
+  //             pagination: {
+  //               el: ".swiper-pagination",
+  //             },
+  //             // 如果需要前进后退按钮
+  //             navigation: {
+  //               nextEl: ".swiper-button-next",
+  //               prevEl: ".swiper-button-prev",
+  //             },
+  //             // 如果需要滚动条
+  //             scrollbar: {
+  //               el: ".swiper-scrollbar",
+  //             },
+  //           });
+  //         });
+  //         console.log("handler-end");
+  //       },
+  //     },
+  //   },
   mounted() {
+    console.log("mounted-start");
     this.$store.dispatch("getBannerList");
-    setTimeout(() => {
-      var mySwiper = new Swiper(".swiper-container", {
-        loop: true, // 循环模式选项
-
-        // 如果需要分页器
-        pagination: {
-          el: ".swiper-pagination",
-        },
-
-        // 如果需要前进后退按钮
-        navigation: {
-          nextEl: ".swiper-button-next",
-          prevEl: ".swiper-button-prev",
-        },
-
-        // 如果需要滚动条
-        scrollbar: {
-          el: ".swiper-scrollbar",
-        },
-      });
-    }, 2000);
+    console.log("mounted-end");
   },
   computed: {
     ...mapState({
       bannerList: (state) => state.home.bannerList,
     }),
+  },
+  created() {
+    console.log("Created-statr");
+    this.$nextTick(() => {
+      console.log("swiper");
+      var mySwiper = new Swiper(".swiper-container", {
+        loop: true, // 循环模式选项
+        // 如果需要分页器
+        pagination: {
+          el: ".swiper-pagination",
+        },
+        // 如果需要前进后退按钮
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
+        // 如果需要滚动条
+        scrollbar: {
+          el: ".swiper-scrollbar",
+        },
+      });
+    });
+    console.log("Created-end");
   },
 };
 </script>

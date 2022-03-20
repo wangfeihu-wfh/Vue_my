@@ -5,3 +5,4 @@ import mockRequests from './mockAjax';
 export const reqCategoryList = () =>
   requests({ url: '/product/getBaseCategoryList', method: 'GET' });
 export const reqGetBannerList = () => mockRequests.get('/banner');
+export const reqFloorList = () => mockRequests.get('/floor');

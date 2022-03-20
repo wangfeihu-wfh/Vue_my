@@ -4,7 +4,7 @@
     <div class="sortList clearfix">
       <div class="center">
         <!--banner轮播-->
-        <div class="swiper-container" id="mySwiper">
+        <div class="swiper-container" ref="mySwiper">
           <div class="swiper-wrapper">
             <div
               class="swiper-slide"
@@ -100,65 +100,61 @@ import { mapState } from "vuex";
 import Swiper from "swiper";
 export default {
   name: "ListContainer",
-  //   watch: {
-  //     bannerList: {
-  //       handler() {
-  //         console.log("handler");
-  //         this.$nextTick(() => {
-  //           console.log("nextTick");
-  //           var mySwiper = new Swiper(".swiper-container", {
-  //             loop: true, // 循环模式选项
-  //             // 如果需要分页器
-  //             pagination: {
-  //               el: ".swiper-pagination",
-  //             },
-  //             // 如果需要前进后退按钮
-  //             navigation: {
-  //               nextEl: ".swiper-button-next",
-  //               prevEl: ".swiper-button-prev",
-  //             },
-  //             // 如果需要滚动条
-  //             scrollbar: {
-  //               el: ".swiper-scrollbar",
-  //             },
-  //           });
-  //         });
-  //         console.log("handler-end");
-  //       },
-  //     },
-  //   },
+  watch: {
+    bannerList: {
+      handler() {
+        this.$nextTick(() => {
+          var mySwiper = new Swiper(this.$refs.mySwiper, {
+            loop: true, // 循环模式选项
+            // 如果需要分页器
+            pagination: {
+              el: ".swiper-pagination",
+            },
+            // 如果需要前进后退按钮
+            navigation: {
+              nextEl: ".swiper-button-next",
+              prevEl: ".swiper-button-prev",
+            },
+            // 如果需要滚动条
+            scrollbar: {
+              el: ".swiper-scrollbar",
+            },
+          });
+        });
+      },
+    },
+  },
   mounted() {
-    console.log("mounted-start");
     this.$store.dispatch("getBannerList");
-    console.log("mounted-end");
+    // 为什么$nextTick不能放在mounted中
+    // 当页面挂在到view中，才会调用mounted()
+    // 首先执行this.$store.dispatch("getBannerList");数据请求是一个微任务，挂到微任务列表
+    // 但是$nextTick的优先级大于微任务，会首先执行，此时的数据没有更新，也即vue没有拿到轮播图
+    // 如果放到watch中，会首先请求数据，在改变数据，循环更新DOM后再调用$nextTick，才能拿到轮播图
+    // this.$nextTick(() => {
+    //   var mySwiper = new Swiper(".swiper-container", {
+    //     loop: true, // 循环模式选项
+    //     // 如果需要分页器
+    //     pagination: {
+    //       el: ".swiper-pagination",
+    //     },
+    //     // 如果需要前进后退按钮
+    //     navigation: {
+    //       nextEl: ".swiper-button-next",
+    //       prevEl: ".swiper-button-prev",
+    //     },
+    //     // 如果需要滚动条
+    //     scrollbar: {
+    //       el: ".swiper-scrollbar",
+    //     },
+    //   });
+    //   console.log("NextTick-end");
+    // });
   },
   computed: {
     ...mapState({
       bannerList: (state) => state.home.bannerList,
     }),
-  },
-  created() {
-    console.log("Created-statr");
-    this.$nextTick(() => {
-      console.log("swiper");
-      var mySwiper = new Swiper(".swiper-container", {
-        loop: true, // 循环模式选项
-        // 如果需要分页器
-        pagination: {
-          el: ".swiper-pagination",
-        },
-        // 如果需要前进后退按钮
-        navigation: {
-          nextEl: ".swiper-button-next",
-          prevEl: ".swiper-button-prev",
-        },
-        // 如果需要滚动条
-        scrollbar: {
-          el: ".swiper-scrollbar",
-        },
-      });
-    });
-    console.log("Created-end");
   },
 };
 </script>

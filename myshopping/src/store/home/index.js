@@ -1,4 +1,4 @@
-import { reqCategoryList, reqGetBannerList } from '@/api';
+import { reqCategoryList, reqGetBannerList, reqFloorList } from '@/api';
 // home的vuex
 const actions = {
   async categoryList({ commit }) {
@@ -10,14 +10,19 @@ const actions = {
     }
   },
   async getBannerList({ commit }) {
-    console.log('getBannerList-satrt');
     let result = await reqGetBannerList();
-    console.log('getBannerList-end');
     if (result.code === 200) {
-      console.log('result');
       commit('GETBANNERLIST', result.data);
     } else {
       throw new Error('list 数据请求错误');
+    }
+  },
+  async getFloorList({ commit }) {
+    let result = await reqFloorList();
+    if (result.code === 200) {
+      commit('REQFLOORLIST', result.data);
+    } else {
+      throw new Error('floor数据请求错误');
     }
   },
 };
@@ -26,13 +31,16 @@ const mutations = {
     state.categoryList = categoryList;
   },
   GETBANNERLIST(state, bannerList) {
-    console.log('GETBANNERLIST');
     state.bannerList = bannerList;
+  },
+  REQFLOORLIST(state, floorList) {
+    state.floorList = floorList;
   },
 };
 const state = {
   categoryList: [],
   bannerList: [],
+  floorList: [],
 };
 const getters = {};
 

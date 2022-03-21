@@ -28,26 +28,10 @@
                 <img :src="item.imgUrl" />
               </div>
               <div class="floorBanner">
-                <div class="swiper-container" ref="floorSwiper">
-                  <div class="swiper-wrapper">
-                    <div
-                      class="swiper-slide"
-                      v-for="carousel in item.carouselList"
-                      :key="carousel.id"
-                    >
-                      <img :src="carousel.imgUrl" />
-                    </div>
-                  </div>
-                  <!-- 如果需要分页器 -->
-                  <div class="swiper-pagination"></div>
-
-                  <!-- 如果需要导航按钮 -->
-                  <div class="swiper-button-prev"></div>
-                  <div class="swiper-button-next"></div>
-                </div>
+                <!-- 轮播图 -->
+                <Carousel :List="item.carouselList" />
               </div>
               <div class="split">
-                {{ item.recommendList[0] }}
                 <span class="floor-x-line"></span>
                 <div class="floor-conver-pit">
                   <img :src="item.recommendList[0]" />
@@ -78,34 +62,37 @@
 
 <script>
 import Swiper from "swiper";
-import { mapState } from "vuex";
+// import { mapState } from "vuex";
+
 export default {
   name: "FloorPage",
   props: ["floorList"],
-  mounted() {
-    var mySwiper = new Swiper(this.$refs.floorSwiper, {
-      loop: true, // 循环模式选项
-      // 如果需要分页器
-      pagination: {
-        el: ".swiper-pagination",
-      },
-      // 如果需要前进后退按钮
-      navigation: {
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev",
-      },
-      // 如果需要滚动条
-      scrollbar: {
-        el: ".swiper-scrollbar",
-      },
-    });
-  },
-  //   floor获取数据的时候也可以根据banner.vue一样自己请求数据，或者根据上面用父组件请求数据传递给子组件
+  //#region
+  //   mounted() {
+  //     var mySwiper = new Swiper(this.$refs.mySwiper, {
+  //       loop: true, // 循环模式选项
+  //       // 如果需要分页器
+  //       pagination: {
+  //         el: ".swiper-pagination",
+  //       },
+  //       // 如果需要前进后退按钮
+  //       navigation: {
+  //         nextEl: ".swiper-button-next",
+  //         prevEl: ".swiper-button-prev",
+  //       },
+  //       // 如果需要滚动条
+  //       scrollbar: {
+  //         el: ".swiper-scrollbar",
+  //       },
+  //     });
+  //   },
+  // floor获取数据的时候也可以根据banner.vue一样自己请求数据，或者根据上面用父组件请求数据传递给子组件
   //   watch: {
   //     floorList: {
+  //       immediate: true,
   //       handler() {
   //         this.$nextTick(() => {
-  //           var mySwiper = new Swiper(this.$refs.floorSwiper, {
+  //           var mySwiper = new Swiper(this.$refs.mySwiper, {
   //             loop: true, // 循环模式选项
   //             // 如果需要分页器
   //             pagination: {
@@ -125,6 +112,7 @@ export default {
   //       },
   //     },
   //   },
+
   //   mounted() {
   //     this.$store.dispatch("getFloorList");
   //   },
@@ -133,6 +121,7 @@ export default {
   //       floorList: (state) => state.home.floorList,
   //     }),
   //   },
+  //#endRegion
 };
 </script>
 

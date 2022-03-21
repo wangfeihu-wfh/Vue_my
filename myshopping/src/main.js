@@ -5,7 +5,9 @@ import router from '@/router/index';
 import store from '@/store/index';
 import '@/mock/mockServe';
 import 'swiper/css/swiper.css';
+import Carousel from '@/components/Carousel';
 Vue.component(TypeNav.name, TypeNav);
+Vue.component(Carousel.name, Carousel);
 Vue.config.productionTip = false;
 
 new Vue({

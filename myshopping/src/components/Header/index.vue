@@ -33,7 +33,7 @@
       <div class="searchArea">
         <form action="###" class="searchForm">
           <input
-            v-model="keyWord"
+            v-model="keyword"
             type="text"
             id="autocomplete"
             class="input-error input-xxlarge"
@@ -57,7 +57,7 @@ export default {
   name: "HeaderPage",
   data() {
     return {
-      keyWord: "",
+      keyword: "",
     };
   },
   methods: {
@@ -67,19 +67,26 @@ export default {
       // this.$router.push(`/search/${this.keyWord}?k=${this.keyWord.toUpperCase()}`)
       // this.$router.push({name:'search',params:{keyWord:this.keyWord||''||undefined},query:{k:this.keyWord.toUpperCase()}})
       if (this.$route.query) {
-        let location = {
-          name: "search",
-          params: { keyWord: this.keyWord || undefined },
-        };
-        location.query = this.$route.query;
-        this.$router.push(location);
+        // let location = {
+        //   name: "search",
+        //   //   params: { keyword: this.keyword || undefined },
+        // };
+        // Object.assign(this.$route.query, this.keyword);
+        this.$route.query.keyword = this.keyword;
+        console.log("keyword", this.$route.query);
+        // location.query = this.$route.query;
+        // this.$router.push(location);
+        this.$router.push({
+          path: "/search",
+          query: this.$route.query,
+        });
       }
     },
   },
 };
 </script>
 
-<style lang='less'>
+<style lang='less' scoped>
 .header {
   & > .top {
     background-color: #eaeaea;

@@ -124,6 +124,7 @@ export default {
         } else {
           query.category3id = category3id;
         }
+        query.keyword = this.$route.query.keyword;
         location.query = query;
         this.$router.push(location);
       }

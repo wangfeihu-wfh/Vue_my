@@ -144,12 +144,31 @@ export default {
   components: {
     SearchSelector,
   },
+  created() {
+    // this.$router.beforeEach((to, from, next) => {
+    //   console.log(to);
+    //   next();
+    // });
+  },
   beforeMount() {
     // Object.assign(this.searchParams, this.$route.query, this.$route.params);
     Object.assign(this.searchParams, this.$route.query);
   },
   mounted() {
     this.getData();
+    // window.addEventListener(
+    //   "hashchange",
+    //   () => {
+    //     var currentPath = window.location.hash.slice(1); // 获取输入的路由
+    //     console.log("hashchange");
+    //     // if (this.$router.path !== currentPath) {
+    //     //   undefined;
+
+    //     //   this.$router.push(currentPath); // 动态跳转
+    //     // }
+    //   },
+    //   false
+    // );
   },
   computed: {
     ...mapGetters(["goodsList"]),
@@ -157,33 +176,45 @@ export default {
   methods: {
     getData() {
       this.$store.dispatch(`getSearchInfo`, this.searchParams);
+      console.log("getNewData");
     },
   },
   //   watch: {
-  //     //     immediate: true,
+  //     // immediate: true,
 
-  //     $route(to, from) {
-  //       console.log("watch 检测到了");
-  //       Object.assign(this.searchParams, this.$route.query);
-  //       //   if (newVla !== oldVal) {
-  //       //     // Object.assign(this.searchParams, this.$route.query);
-  //       //     console.log(this.$route.query);
-  //       this.getData();
+  //     $route(newValue, oldValue) {
   //       deep: true;
-  //       //   }
+  //       console.log(newValue, oldValue);
+  //       //每一次请求完毕，应该把相应的1、2、3级分类的id置空的，让他接受下一次的相应1、2、3
+  //       //再次发请求之前整理带给服务器参数
+  //       Object.assign(this.searchParams, this.$route.query);
+  //       //再次发起ajax请求
+  //       this.getData();
   //     },
-  //     //     // "$route.query": {
-  //     //     //   handler() {
-  //     //     //     immediate: true, Object.assign(this.searchParams, this.$route.query);
-  //     //     //     this.getData();
-  //     //     //   },
-  //     //     // },
+  //   },
+  //   watch: {
+  //     //监听路由的信息是否发生变化，如果发生变化，再次发起请求
+  //     $route(to, from) {
+  //       console.log("watch");
+  //       console.log(to, from);
+  //       //每一次请求完毕，应该把相应的1、2、3级分类的id置空的，让他接受下一次的相应1、2、3
+  //       //再次发请求之前整理带给服务器参数
+  //       Object.assign(this.searchParams, this.$route.query, this.$route.params);
+  //       //再次发起ajax请求
+  //       this.getData();
+  //       //分类名字与关键字不用清理：因为每一次路由发生变化的时候，都会给他赋予新的数据
+  //       //   this.searchParams.category1Id = undefined;
+  //       //   this.searchParams.category2Id = undefined;
+  //       //   this.searchParams.category3Id = undefined;
+  //     },
   //   },
   watch: {
     $route: {
-      handler: function (val, oldVal) {
-        console.log(val);
+      handler(val, oldval) {
+        console.log(val); //新路由信息
+        console.log(oldval); //老路由信息
       },
+      // 深度观察监听
       deep: true,
     },
   },

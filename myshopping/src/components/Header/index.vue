@@ -53,34 +53,98 @@
 </template>
 
 <script>
+import merge from "webpack-merge";
 export default {
   name: "HeaderPage",
   data() {
     return {
       keyword: "",
+      searchParams: {
+        category1id: "",
+        category2id: "",
+        category3id: "",
+        categoryName: "",
+        keyword: "",
+      },
     };
   },
   methods: {
+    // goSearch() {
+    //   // 路由传递参数(三种方法)
+    //   // this.$router.push("/search/"+this.keyWord+"?k="+this.keyWord.toUpperCase())
+    //   // this.$router.push(`/search/${this.keyWord}?k=${this.keyWord.toUpperCase()}`)
+    //   // this.$router.push({name:'search',params:{keyWord:this.keyWord||''||undefined},query:{k:this.keyWord.toUpperCase()}})
+    //   if (this.$route.query) {
+    //     // let location = {
+    //     //   name: "search",
+    //     //   //   params: { keyword: this.keyword || undefined },
+    //     // };
+    //     // Object.assign(this.$route.query, this.keyword);
+    //     this.$route.query.keyword = this.keyword;
+    //     console.log("keyword", this.$route.query);
+    //     // location.query = this.$route.query;
+    //     // this.$router.push(location);
+    //     this.$router.push({
+    //       path: "/search",
+    //       query: this.$route.query,
+    //     });
+    //   }
+    // },
+    // goSearch() {
+    //   Object.assign(this.searchParams, this.$route.query);
+    //   this.searchParams.keyword = this.keyword;
+    //   //   console.log(this.searchParams);
+    //   //   if (this.$route.query) {
+    //   let location = {
+    //     name: "search",
+    //     query: { keyword: this.keyword || "" || undefined },
+    //     // query: this.searchParams,
+    //     //   query: `{${this.$route.query},keyword:${
+    //     //     this.keyword || "" || undefined
+    //     //   }}`,
+    //   };
+    //   //   console.log(location);
+    //   // location.query = this.$route.query;
+    //   // location.query.keyword = this.keyword || "" || undefined;
+    //   // console.log(location.query);
+    //   // this.$route.query.keyword = this.keyword || "" || undefined;
+    //   // location.query = this.$route.query;
+    //   // console.log(location);
+    //   // this.$router.push(location);
+    //   this.$router.push({
+    //     name: "search",
+    //     query: location.query,
+    //   });
+    //   //   }
+    //   //   this.$router.push({
+    //   //     name: "search",
+    //   //     query: { keyword: this.keyword || "" || undefined },
+    //   //   });
+    //   //   console.log(this.$route);
+    // },
+
+    // goSearch() {
+    //   //代表的是如果有query参数也带过去
+    //   console.log(this.keyword);
+    //   if (this.$route.query) {
+    //     let location = {
+    //       name: "search",
+    //       //   params: { keyword: this.keyword || undefined },
+    //       query: { keyword: this.keyword || "" || undefined },
+    //     };
+    //     Object.assign(location.query, this.$route.query);
+    //     console.log(location);
+    //     // loction.query = this.$route.query;
+    //     // location.query.keyword = this.keyword;
+    //     // this.$router.push(location);
+    //     this.$route.query = JSON.parse(JSON.stringify(location.query));
+    //   }
+    // },
     goSearch() {
-      // 路由传递参数(三种方法)
-      // this.$router.push("/search/"+this.keyWord+"?k="+this.keyWord.toUpperCase())
-      // this.$router.push(`/search/${this.keyWord}?k=${this.keyWord.toUpperCase()}`)
-      // this.$router.push({name:'search',params:{keyWord:this.keyWord||''||undefined},query:{k:this.keyWord.toUpperCase()}})
-      if (this.$route.query) {
-        // let location = {
-        //   name: "search",
-        //   //   params: { keyword: this.keyword || undefined },
-        // };
-        // Object.assign(this.$route.query, this.keyword);
-        this.$route.query.keyword = this.keyword;
-        console.log("keyword", this.$route.query);
-        // location.query = this.$route.query;
-        // this.$router.push(location);
-        this.$router.push({
-          path: "/search",
-          query: this.$route.query,
-        });
-      }
+      this.$router.push({
+        name: "search",
+        query: merge(this.$route.query, { keyword: this.keyword }),
+      });
     },
   },
 };

@@ -38,7 +38,6 @@ const getters = {
     return state.searchInfo.attrsList || [];
   },
 };
-
 export default {
   actions,
   mutations,

@@ -35,9 +35,6 @@ export default {
   computed: {
     ...mapGetters(["trademarkList", "attrsList"]),
   },
-  mounted() {
-    console.log("SearchSelector");
-  },
 };
 </script>
 

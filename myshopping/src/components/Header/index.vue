@@ -30,15 +30,15 @@
           <img src="./images/logo.png" alt="" />
         </router-link>
       </h1>
-      <div class="searchArea">
-        <form action="###" class="searchForm">
+       <div class="searchArea">
+ 		<!--在form中阻止默认行为-->
+        <form action="###" class="searchForm" @submit.prevent>
           <input
             v-model="keyword"
-            type="text"
             id="autocomplete"
             class="input-error input-xxlarge"
+            @keyup.enter="goSearch"
           />
-          <!-- 编程式导航 -->
           <button
             class="sui-btn btn-xlarge btn-danger"
             type="button"
@@ -48,6 +48,7 @@
           </button>
         </form>
       </div>
+
     </div>
   </header>
 </template>

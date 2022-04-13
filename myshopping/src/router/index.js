@@ -8,6 +8,7 @@ import Home from '@/pages/Home/index.vue';
 import Login from '@/pages/Login/index.vue';
 import Register from '@/pages/Register/index.vue';
 import Search from '@/pages/Search/index.vue';
+import Detail from '@/pages/Detail/index.vue'
 let originPush = VueRouter.prototype.push;
 let originReplace = VueRouter.prototype.replace;
 // 重写push\replace
@@ -38,6 +39,11 @@ VueRouter.prototype.replace = function (location, resolve, reject) {
 export default new VueRouter({
   //配置路由
   routes: [
+    {
+      path:'/detail/:goodId',
+      component: Detail,
+      meta: {show: true}
+    },
     {
       path: '/home',
       component: Home,

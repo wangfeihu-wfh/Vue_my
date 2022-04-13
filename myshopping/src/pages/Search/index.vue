@@ -26,11 +26,23 @@
           <div class="sui-navbar">
             <div class="navbar-inner filter">
               <ul class="sui-nav">
-                <li :class="{active:isOne}" @click="changeOrder('1')">
-                  <a>综合<span v-show="isOne" class="iconfont" :class="{'icon-up':isAsc,'icon-down':isDesc}"></span></a>
+                <li :class="{ active: isOne }" @click="changeOrder('1')">
+                  <a
+                    >综合<span
+                      v-show="isOne"
+                      class="iconfont"
+                      :class="{ 'icon-up': isAsc, 'icon-down': isDesc }"
+                    ></span
+                  ></a>
                 </li>
-                <li :class="{active:isTwo}" @click="changeOrder('2')">
-                  <a>价格<span v-show="isTwo" class="iconfont" :class="{'icon-down':isDesc,'icon-up':isAsc}"></span></a>
+                <li :class="{ active: isTwo }" @click="changeOrder('2')">
+                  <a
+                    >价格<span
+                      v-show="isTwo"
+                      class="iconfont"
+                      :class="{ 'icon-down': isDesc, 'icon-up': isAsc }"
+                    ></span
+                  ></a>
                 </li>
               </ul>
             </div>
@@ -40,9 +52,9 @@
               <li class="yui3-u-1-5" v-for="goods in goodsList" :key="goods.id">
                 <div class="list-wrap">
                   <div class="p-img">
-                    <a href="item.html" target="_blank"
-                      ><img :src="goods.defaultImg"
-                    /></a>
+                    <router-link>
+                      <img :src="goods.defaultImg" />
+                    </router-link>
                   </div>
                   <div class="price">
                     <strong>
@@ -74,7 +86,13 @@
             </ul>
           </div>
           <!-- <Pagination :total='total' :pageSize='searchParams.pageSize' :pageNo='searchParams.pageNo' :continues='5' @getPageNo="getPageNo"/> -->
-           <Pagination :total="total" :pageSize="searchParams.pageSize" :pageNo="searchParams.pageNo" :continues="5" @currentPage="getPageNo"/>
+          <Pagination
+            :total="total"
+            :pageSize="searchParams.pageSize"
+            :pageNo="searchParams.pageNo"
+            :continues="5"
+            @getPageNo="getPageNo"
+          />
         </div>
       </div>
     </div>
@@ -96,8 +114,8 @@ export default {
         categoryName: "",
         keyword: "",
         order: "1:desc",
-        pageNo: 15,
-        pageSize: 10,
+        pageNo: 1,
+        pageSize: 8,
         props: [],
         trademark: "",
       },
@@ -114,42 +132,42 @@ export default {
   },
   computed: {
     ...mapGetters(["goodsList"]),
-    isOne(){
-      return this.searchParams.order.indexOf('1')!==-1;
+    isOne() {
+      return this.searchParams.order.indexOf("1") !== -1;
     },
-    isTwo(){
-      return this.searchParams.order.indexOf('2')!==-1;
+    isTwo() {
+      return this.searchParams.order.indexOf("2") !== -1;
     },
-    isAsc(){
-      return this.searchParams.order.indexOf('asc')!==-1;
+    isAsc() {
+      return this.searchParams.order.indexOf("asc") !== -1;
     },
-    isDesc(){
-      return this.searchParams.order.indexOf('desc')!==-1;
+    isDesc() {
+      return this.searchParams.order.indexOf("desc") !== -1;
     },
-     ...mapState({
-       total:(state)=>state.search.searchInfo.total,
-    })
+    ...mapState({
+      total: (state) => state.search.searchInfo.total,
+    }),
   },
   methods: {
     getData() {
       this.$store.dispatch(`getSearchInfo`, this.searchParams);
     },
-    changeOrder(flag){
+    changeOrder(flag) {
       let originFlag = this.searchParams.order.split(":")[0];
       let originSort = this.searchParams.order.split(":")[1];
-      let newOrder = '';
-      if(flag===originFlag){
-        newOrder = `${originFlag}:${originSort==='desc'?'asc':'desc'}`;
-      }else {
-        newOrder = `${flag}:${'desc'}`;
+      let newOrder = "";
+      if (flag === originFlag) {
+        newOrder = `${originFlag}:${originSort === "desc" ? "asc" : "desc"}`;
+      } else {
+        newOrder = `${flag}:${"desc"}`;
       }
       this.searchParams.order = newOrder;
-      this.getData()
+      this.getData();
     },
-    getPageNo(pageNo){
+    getPageNo(pageNo) {
       this.searchParams.pageNo = pageNo;
-      this.getData()
-    }
+      this.getData();
+    },
   },
   //   watch: {
   //     // immediate: true,
@@ -435,8 +453,6 @@ export default {
           }
         }
       }
-
-     
     }
   }
 }
